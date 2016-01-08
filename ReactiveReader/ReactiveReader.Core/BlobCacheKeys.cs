@@ -10,6 +10,6 @@ namespace ReactiveReader.Core
     {
         public string Feeds => "feeds";
 
-        public string GetCacheKeyForFeedAddress(Uri feedAddress) => $"feedAdderess-{feedAddress.Host.ToLowerInvariant()}";
+        public string GetCacheKeyForFeedAddress(Uri feedAddress) => $"feedAddress-{feedAddress.Host.ToLowerInvariant()}";
     }
 }
