@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ReactiveReader.UWP.Styles">
+    <SolidColorBrush x:Key="BrandWhite" Color="{StaticResource BrandWhite}" />
+    <SolidColorBrush x:Key="BrandBlackBrush" Color="{StaticResource BrandBlack}" />
+    <SolidColorBrush x:Key="BrandBlueBrush" Color="{StaticResource BrandBlue}" />
+    <SolidColorBrush x:Key="BrandPurpleBrush" Color="{StaticResource BrandPurple}" />
+</ResourceDictionary>
