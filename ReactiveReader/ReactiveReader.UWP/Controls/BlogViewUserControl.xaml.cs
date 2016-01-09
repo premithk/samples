@@ -1,4 +1,6 @@
-﻿using ReactiveReader.Core.ViewModels;
+﻿using System;
+using System.Reactive.Linq;
+using ReactiveReader.Core.ViewModels;
 using ReactiveUI;
 using Windows.UI.Xaml.Controls;
 
@@ -10,11 +12,12 @@ namespace ReactiveReader.UWP.Controls
         {
             this.InitializeComponent();
 
-            this.WhenActivated(d =>
-            {
-                // behaviours
 
-            });
+            // behaviour
+            
+            // When the view is displayed to the user, automatically load data from cache/refresh latest.
+            this.WhenAnyValue(view => view)
+                .InvokeCommand(ViewModel, viewModel => viewModel.Refresh);
         }
 
         object IViewFor.ViewModel
