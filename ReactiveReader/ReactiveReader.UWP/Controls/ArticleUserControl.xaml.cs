@@ -22,6 +22,16 @@ namespace ReactiveReader.UWP.Controls
         public ArticleUserControl()
         {
             this.InitializeComponent();
+
+            this.WhenActivated(d =>
+            {
+                // behaviours
+
+                this.OneWayBind(ViewModel, viewModel => viewModel.Title, view => view.Title);
+
+                // TODO DateTimeOffset converter to humainzer nuget.
+                this.OneWayBind(ViewModel, viewModel => viewModel.Content, view => view.Content);
+            });
         }
 
         object IViewFor.ViewModel
