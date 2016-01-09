@@ -12,6 +12,7 @@ namespace ReactiveReader.Core.ViewModels
     {
         ReactiveCommand<Unit> RemoveBlog { get; }
         ReactiveCommand<Unit> AddBlog { get; }
+        ReactiveCommand<Unit> PersistData { get; }
         ReactiveList<BlogViewModel> Blogs { get; }
         ReactiveCommand<Unit> RefreshAll { get; }
         bool IsLoading { get; }
@@ -40,20 +41,27 @@ namespace ReactiveReader.Core.ViewModels
 
             RefreshAll.IsExecuting.ToProperty(this, x => x.IsLoading);
 
+            PersistData =
+                ReactiveCommand.CreateAsyncTask(async x => { await Cache.InsertObject(BlobCacheKeys.Blogs, Blogs); });
+
+            PersistData.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
 
             // behaviours
 
             // when a blog is added or removed, wait for 5 seconds of inactivity before persisting the data as the user may be doing bulk [add|remove] operations.
             this.WhenAnyValue(viewModel => viewModel.Blogs)
                 .Throttle(TimeSpan.FromSeconds(5), RxApp.MainThreadScheduler)
-                .Subscribe(x => { Cache.InsertObject(BlobCacheKeys.Blogs, Blogs); });
+                .InvokeCommand(this, viewModel => viewModel.PersistData);
 
             // post-condition checks
             Condition.Ensures(Cache).IsNotNull();
+            Condition.Ensures(RefreshAll).IsNotNull();
+            Condition.Ensures(PersistData).IsNotNull();
         }
 
         public ReactiveCommand<Unit> RemoveBlog { get; }
         public ReactiveCommand<Unit> AddBlog { get; }
+        public ReactiveCommand<Unit> PersistData { get; }
         public ReactiveList<BlogViewModel> Blogs { get; set; }
         public ReactiveCommand<Unit> RefreshAll { get; }
         public bool IsLoading { get; private set; }
