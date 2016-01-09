@@ -4,11 +4,12 @@ using System.Reactive.Linq;
 using Akavache;
 using Conditions;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using Splat;
 
 namespace ReactiveReader.Core.ViewModels
 {
+    using System.Threading.Tasks;
+
     public interface IFeedsViewModel
     {
         ReactiveCommand<Unit> RemoveBlog { get; }
@@ -19,9 +20,9 @@ namespace ReactiveReader.Core.ViewModels
         bool IsLoading { get; }
     }
 
-    public class FeedsViewModel : ReactiveObject, IFeedsViewModel, IEnableLogger
+    public class FeedsViewModel : ReactiveObject, IFeedsViewModel
     {
-        private readonly IBlobCache Cache;
+        IBlobCache Cache { get; }
 
         public FeedsViewModel(IBlobCache cache = null)
         {
@@ -30,17 +31,19 @@ namespace ReactiveReader.Core.ViewModels
             Cache.GetOrCreateObject(BlobCacheKeys.Blogs, () => new ReactiveList<BlogViewModel>())
                 .Subscribe(blogs => { Blogs = blogs; });
 
-            RefreshAll = ReactiveCommand.CreateAsyncTask(async x =>
+            RefreshAll = ReactiveCommand.CreateAsyncTask(x =>
             {
                 foreach (var blog in Blogs)
                 {
                     blog.Refresh.InvokeCommand(null);
                 }
+
+                return Task.FromResult(Unit.Default);
             });
 
             RefreshAll.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
 
-            RefreshAll.IsExecuting.ToProperty(this, x => x.IsLoading);
+            _isLoading = RefreshAll.IsExecuting.ToProperty(this, x => x.IsLoading);
 
             PersistData =
                 ReactiveCommand.CreateAsyncTask(async x => { await Cache.InsertObject(BlobCacheKeys.Blogs, Blogs); });
@@ -55,7 +58,9 @@ namespace ReactiveReader.Core.ViewModels
                 .InvokeCommand(this, viewModel => viewModel.PersistData);
 
             // When an user adds a new blog to the feed, automatically fetch/cache the contents of the blog.
+            // When a blog becomes the selected blog, fetch/cache the contents of the blog.
             this.WhenAnyObservable(viewModel => viewModel.Blogs.ItemsAdded)
+                .Merge(this.WhenAnyValue(viewModel => viewModel.SelectedBlog).Where(blogVm => blogVm != null))
                 .Subscribe(x => x.Refresh.InvokeCommand(null));
 
             // post-condition checks
@@ -64,12 +69,29 @@ namespace ReactiveReader.Core.ViewModels
             Condition.Ensures(PersistData).IsNotNull();
         }
 
-        public ReactiveCommand<Unit> RemoveBlog { get; private set; }
-        public ReactiveCommand<Unit> AddBlog { get; private set; }
-        public ReactiveCommand<Unit> PersistData { get; private set;  }
-        public ReactiveList<BlogViewModel> Blogs { get; private set; }
-        public ReactiveCommand<Unit> RefreshAll { get; private set; }
-        [Reactive]
-        public bool IsLoading { get; private set; }
+        public ReactiveCommand<Unit> RemoveBlog { get; }
+        public ReactiveCommand<Unit> AddBlog { get; }
+        public ReactiveCommand<Unit> PersistData { get; }
+        public ReactiveCommand<Unit> RefreshAll { get; }
+
+        ReactiveList<BlogViewModel> _blogs;
+        public ReactiveList<BlogViewModel> Blogs
+        {
+            get { return _blogs; }
+            private set { this.RaiseAndSetIfChanged(ref _blogs, value); }
+        }
+
+        BlogViewModel _selectedBlog;
+        public BlogViewModel SelectedBlog
+        {
+            get { return _selectedBlog; }
+            set { this.RaiseAndSetIfChanged(ref _selectedBlog, value); }
+        }
+
+        readonly ObservableAsPropertyHelper<bool> _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading.Value; }
+        }
     }
 }

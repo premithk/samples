@@ -1,10 +1,5 @@
-﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReactiveUI.Fody.Helpers;
+﻿using System;
+using ReactiveUI;
 
 namespace ReactiveReader.Core.ViewModels
 {
@@ -17,11 +12,25 @@ namespace ReactiveReader.Core.ViewModels
 
     public class ArticleViewModel : ReactiveObject, IArticleViewModel
     {
-        [Reactive]
-        public string Content { get; set; }
-        [Reactive]
-        public DateTimeOffset PublishDate { get; set; }
-        [Reactive]
-        public string Title { get; set; }
+        string _content;
+        public string Content
+        {
+            get { return _content; }
+            set { this.RaiseAndSetIfChanged(ref _content, value); }
+        }
+
+        DateTimeOffset _publishDate;
+        public DateTimeOffset PublishDate
+        {
+            get { return _publishDate; }
+            set { this.RaiseAndSetIfChanged(ref _publishDate, value); }
+        }
+
+        string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { this.RaiseAndSetIfChanged(ref _title, value); }
+        }
     }
 }

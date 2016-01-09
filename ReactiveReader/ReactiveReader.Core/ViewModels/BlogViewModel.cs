@@ -1,14 +1,11 @@
-﻿using ReactiveUI;
-using Splat;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Akavache;
 using Conditions;
 using ReactiveReader.Core.Services;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI;
+using Splat;
 
 namespace ReactiveReader.Core.ViewModels
 {
@@ -21,10 +18,10 @@ namespace ReactiveReader.Core.ViewModels
         string Title { get; }
     }
 
-    public class BlogViewModel : ReactiveObject, IBlogViewModel, IEnableLogger
+    public class BlogViewModel : ReactiveObject, IBlogViewModel
     {
-        private readonly IFeedService FeedService;
-        private readonly IBlobCache Cache;
+        IFeedService FeedService { get; }
+        IBlobCache Cache { get; }
 
         public BlogViewModel(string title, Uri feedAddress, IFeedService feedService = null, IBlobCache cache = null)
         {
@@ -47,7 +44,7 @@ namespace ReactiveReader.Core.ViewModels
 
             
             Refresh.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
-            Refresh.IsExecuting.ToProperty(this, x => x.IsLoading);
+            _isLoading = Refresh.IsExecuting.ToProperty(this, x => x.IsLoading);
 
             // post-condition checks
             Condition.Ensures(FeedAddress).IsNotNull();
@@ -55,20 +52,31 @@ namespace ReactiveReader.Core.ViewModels
             Condition.Ensures(Cache).IsNotNull();
         }
 
-        public ReactiveList<ArticleViewModel> Articles { get; private set; }
+        public ReactiveCommand<List<ArticleViewModel>> Refresh { get; }
 
-        [Reactive]
-        public Uri FeedAddress { get; private set; }
+        public ReactiveList<ArticleViewModel> Articles { get; }
 
-        [Reactive]
-        public bool IsLoading { get; private set; }
+        Uri _feedAddress;
+        public Uri FeedAddress
+        {
+            get { return _feedAddress; }
+            private set { this.RaiseAndSetIfChanged(ref _feedAddress, value); }
+        }
 
-        public ReactiveCommand<List<ArticleViewModel>> Refresh { get; private set; }
+        readonly ObservableAsPropertyHelper<bool> _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading.Value; }
+        }
 
-        [Reactive]
-        public string Title { get; private set; }
+        string _title;
+        public string Title
+        {
+            get { return _title; }
+            private set { this.RaiseAndSetIfChanged(ref _title, value); }
+        }
 
-        private IObservable<List<ArticleViewModel>>  GetAndFetchLatestArticles()
+        IObservable<List<ArticleViewModel>> GetAndFetchLatestArticles()
         {
             return Cache.GetAndFetchLatest(BlobCacheKeys.GetCacheKeyForFeedAddress(FeedAddress),
                 async () => await Task.Run(() => FeedService.GetFeedFor(FeedAddress)),
