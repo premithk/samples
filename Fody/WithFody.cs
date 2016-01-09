@@ -9,8 +9,8 @@ namespace CleanViewModels
     {
         public ReactiveList<string> Articles { get; }
 
-        [ObservableAsProperty]
-        public extern Uri FeedAddress { get; }
+        [Reactive]
+        public Uri FeedAddress { get; }
 
         [ObservableAsProperty]
         public extern bool IsLoading { get; }
