@@ -36,8 +36,16 @@ namespace ReactiveReader.Core.ViewModels
             Articles = new ReactiveList<ArticleViewModel>();
 
             Refresh = ReactiveCommand.CreateAsyncObservable(x => GetAndFetchLatestArticles());
+            Refresh.Subscribe(articles =>
+            {
+                // this could be done cleaner, send a PR.
+                // Refresh.ToPropertyEx(this, x => x.Articles);
 
+                Articles.Clear();
+                Articles.AddRange(articles);
+            });
 
+            
             Refresh.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
             Refresh.IsExecuting.ToProperty(this, x => x.IsLoading);
 
