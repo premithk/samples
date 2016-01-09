@@ -56,7 +56,7 @@ namespace ReactiveReader.Core.ViewModels
 
             // When an user adds a new blog to the feed, automatically fetch/cache the contents of the blog.
             this.WhenAnyObservable(viewModel => viewModel.Blogs.ItemsAdded)
-                .Subscribe(viewModel => viewModel.Refresh.InvokeCommand(null));
+                .Subscribe(x => x.Refresh.InvokeCommand(null));
 
             // post-condition checks
             Condition.Ensures(Cache).IsNotNull();
@@ -64,11 +64,11 @@ namespace ReactiveReader.Core.ViewModels
             Condition.Ensures(PersistData).IsNotNull();
         }
 
-        public ReactiveCommand<Unit> RemoveBlog { get; }
-        public ReactiveCommand<Unit> AddBlog { get; }
-        public ReactiveCommand<Unit> PersistData { get; }
-        public ReactiveList<BlogViewModel> Blogs { get; set; }
-        public ReactiveCommand<Unit> RefreshAll { get; }
+        public ReactiveCommand<Unit> RemoveBlog { get; private set; }
+        public ReactiveCommand<Unit> AddBlog { get; private set; }
+        public ReactiveCommand<Unit> PersistData { get; private set;  }
+        public ReactiveList<BlogViewModel> Blogs { get; private set; }
+        public ReactiveCommand<Unit> RefreshAll { get; private set; }
         [Reactive]
         public bool IsLoading { get; private set; }
     }
