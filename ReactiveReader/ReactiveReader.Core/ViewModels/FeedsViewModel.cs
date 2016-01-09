@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reactive;
+using System.Reactive.Linq;
+using Akavache;
 using ReactiveUI;
 using Splat;
 
@@ -16,9 +18,14 @@ namespace ReactiveReader.Core.ViewModels
 
     public class FeedsViewModel : ReactiveObject, IFeedsViewModel, IEnableLogger
     {
-        public FeedsViewModel()
+        private readonly IBlobCache Cache;
+
+        public FeedsViewModel(IBlobCache cache = null)
         {
-            Blogs = new ReactiveList<BlogViewModel>();
+            Cache = cache ?? Locator.Current.GetService<IBlobCache>();
+
+            Cache.GetOrCreateObject(BlobCacheKeys.Blogs, () => new ReactiveList<BlogViewModel>())
+                .Subscribe(blogs => { Blogs = blogs; });
 
             Refresh = ReactiveCommand.CreateAsyncTask(async x =>
             {
@@ -31,6 +38,14 @@ namespace ReactiveReader.Core.ViewModels
             Refresh.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
 
             Refresh.IsExecuting.ToProperty(this, x => x.IsLoading);
+
+
+            // behaviours
+
+            // when a blog is added or removed, wait for 5 seconds of inactivity before persisting the data as the user may be doing bulk [add|remove] operations.
+            this.WhenAnyValue(viewModel => viewModel.Blogs)
+                .Throttle(TimeSpan.FromSeconds(5), RxApp.MainThreadScheduler)
+                .Subscribe(x => { Cache.InsertObject(BlobCacheKeys.Blogs, Blogs); });
         }
 
         public ReactiveCommand<Unit> RemoveBlog { get; }
