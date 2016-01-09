@@ -2,6 +2,7 @@
 using System.Reactive;
 using System.Reactive.Linq;
 using Akavache;
+using Conditions;
 using ReactiveUI;
 using Splat;
 
@@ -12,7 +13,7 @@ namespace ReactiveReader.Core.ViewModels
         ReactiveCommand<Unit> RemoveBlog { get; }
         ReactiveCommand<Unit> AddBlog { get; }
         ReactiveList<BlogViewModel> Blogs { get; }
-        ReactiveCommand<Unit> Refresh { get; }
+        ReactiveCommand<Unit> RefreshAll { get; }
         bool IsLoading { get; }
     }
 
@@ -27,7 +28,7 @@ namespace ReactiveReader.Core.ViewModels
             Cache.GetOrCreateObject(BlobCacheKeys.Blogs, () => new ReactiveList<BlogViewModel>())
                 .Subscribe(blogs => { Blogs = blogs; });
 
-            Refresh = ReactiveCommand.CreateAsyncTask(async x =>
+            RefreshAll = ReactiveCommand.CreateAsyncTask(async x =>
             {
                 foreach (var blog in Blogs)
                 {
@@ -35,9 +36,9 @@ namespace ReactiveReader.Core.ViewModels
                 }
             });
 
-            Refresh.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
+            RefreshAll.ThrownExceptions.Subscribe(thrownException => { this.Log().Error(thrownException); });
 
-            Refresh.IsExecuting.ToProperty(this, x => x.IsLoading);
+            RefreshAll.IsExecuting.ToProperty(this, x => x.IsLoading);
 
 
             // behaviours
@@ -46,12 +47,15 @@ namespace ReactiveReader.Core.ViewModels
             this.WhenAnyValue(viewModel => viewModel.Blogs)
                 .Throttle(TimeSpan.FromSeconds(5), RxApp.MainThreadScheduler)
                 .Subscribe(x => { Cache.InsertObject(BlobCacheKeys.Blogs, Blogs); });
+
+            // post-condition checks
+            Condition.Ensures(Cache).IsNotNull();
         }
 
         public ReactiveCommand<Unit> RemoveBlog { get; }
         public ReactiveCommand<Unit> AddBlog { get; }
         public ReactiveList<BlogViewModel> Blogs { get; set; }
-        public ReactiveCommand<Unit> Refresh { get; }
+        public ReactiveCommand<Unit> RefreshAll { get; }
         public bool IsLoading { get; private set; }
     }
 }

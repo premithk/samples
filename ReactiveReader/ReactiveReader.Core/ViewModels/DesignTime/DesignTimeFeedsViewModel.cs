@@ -20,7 +20,7 @@ namespace ReactiveReader.Core.ViewModels.DesignTime
         }
 
         public ReactiveList<BlogViewModel> Blogs { get; set; }
-        public ReactiveCommand<Unit> Refresh { get; }
+        public ReactiveCommand<Unit> RefreshAll { get; }
         public bool IsLoading { get; }
     }
 }
