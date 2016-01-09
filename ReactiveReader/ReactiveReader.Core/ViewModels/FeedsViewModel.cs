@@ -54,6 +54,10 @@ namespace ReactiveReader.Core.ViewModels
                 .Throttle(TimeSpan.FromSeconds(5), RxApp.MainThreadScheduler)
                 .InvokeCommand(this, viewModel => viewModel.PersistData);
 
+            // When an user adds a new blog to the feed, automatically fetch/cache the contents of the blog.
+            this.WhenAnyObservable(viewModel => viewModel.Blogs.ItemsAdded)
+                .Subscribe(viewModel => viewModel.Refresh.InvokeCommand(null));
+
             // post-condition checks
             Condition.Ensures(Cache).IsNotNull();
             Condition.Ensures(RefreshAll).IsNotNull();
