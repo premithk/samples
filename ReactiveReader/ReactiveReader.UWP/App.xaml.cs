@@ -1,23 +1,17 @@
-﻿using ReactiveReader.UWP.Views;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace ReactiveReader.UWP
 {
+    using Akavache;
+    using Core.ViewModels;
+    using Splat;
+    using Views;
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -31,6 +25,10 @@ namespace ReactiveReader.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Locator.CurrentMutable.RegisterConstant(BlobCache.InMemory, typeof(IBlobCache));
+            Locator.CurrentMutable.Register(() => new ArticleView(), typeof(ArticleViewModel));
+            Locator.CurrentMutable.Register(() => new FeedsView(), typeof(FeedsViewModel));
         }
 
 

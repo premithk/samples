@@ -4,31 +4,31 @@
 using ReactiveUI;
     using Windows.UI.Xaml;
 
-    public sealed partial class FeedsView : IViewFor<FeedsViewModel>
-    {
-        public FeedsView()
+    public sealed partial class BlogView : IViewFor<BlogViewModel>
+{
+        public BlogView()
         {
             this.InitializeComponent();
         }
 
-        FeedsViewModel BindingRoot => ViewModel;
+        BlogViewModel BindingRoot => ViewModel;
 
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
             "ViewModel",
-            typeof(FeedsViewModel),
-            typeof(FeedsView),
-            new PropertyMetadata(default(FeedsViewModel)));
-
-        public FeedsViewModel ViewModel
-            {
-            get { return (FeedsViewModel) GetValue(ViewModelProperty); }
+            typeof(BlogViewModel),
+            typeof(BlogView),
+            new PropertyMetadata(default(BlogViewModel)));
+            
+        public BlogViewModel ViewModel
+        {
+            get { return (BlogViewModel) GetValue(ViewModelProperty); }
             set { SetValue(ViewModelProperty, value); }
         }
 
         object IViewFor.ViewModel
         {
             get { return ViewModel; }
-            set { ViewModel = (FeedsViewModel) value; }
+            set { ViewModel = (BlogViewModel)value; }
         }
     }
 }
