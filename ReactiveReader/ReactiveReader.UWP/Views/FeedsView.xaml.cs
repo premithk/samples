@@ -15,7 +15,7 @@ namespace ReactiveReader.UWP.Views
             {
                 // behaviours
 
-                // When a user adds a new blog to the feed, automatically fetch/cache the contents of the blog.
+                // When an user adds a new blog to the feed, automatically fetch/cache the contents of the blog.
                 this.WhenAnyObservable(x => x.ViewModel.Blogs.ItemsAdded)
                     .Subscribe(x => x.Refresh.InvokeCommand(null));
             });
