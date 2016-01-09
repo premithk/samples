@@ -8,7 +8,7 @@ namespace ReactiveReader.Core
 {
     public static class BlobCacheKeys
     {
-        public const string Feeds = "feeds";
+        public const string Blogs = "feeds";
 
         public static string GetCacheKeyForFeedAddress(Uri feedAddress) => $"feedAddress-{feedAddress.Host.ToLowerInvariant()}";
     }
