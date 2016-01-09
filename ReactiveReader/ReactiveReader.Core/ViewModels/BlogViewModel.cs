@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Akavache;
 using Conditions;
 using ReactiveReader.Core.Services;
+using ReactiveUI.Fody.Helpers;
 
 namespace ReactiveReader.Core.ViewModels
 {
@@ -48,12 +49,15 @@ namespace ReactiveReader.Core.ViewModels
 
         public ReactiveList<ArticleViewModel> Articles { get; private set; }
 
+        [Reactive]
         public Uri FeedAddress { get; private set; }
 
+        [Reactive]
         public bool IsLoading { get; private set; }
 
         public ReactiveCommand<List<ArticleViewModel>> Refresh { get; private set; }
 
+        [Reactive]
         public string Title { get; private set; }
 
         private IObservable<List<ArticleViewModel>>  GetAndFetchLatestArticles()

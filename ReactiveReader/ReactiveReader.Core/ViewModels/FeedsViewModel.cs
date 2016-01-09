@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using Akavache;
 using Conditions;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Splat;
 
 namespace ReactiveReader.Core.ViewModels
@@ -64,6 +65,7 @@ namespace ReactiveReader.Core.ViewModels
         public ReactiveCommand<Unit> PersistData { get; }
         public ReactiveList<BlogViewModel> Blogs { get; set; }
         public ReactiveCommand<Unit> RefreshAll { get; }
+        [Reactive]
         public bool IsLoading { get; private set; }
     }
 }
