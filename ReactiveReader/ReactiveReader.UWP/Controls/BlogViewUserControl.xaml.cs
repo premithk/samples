@@ -9,6 +9,12 @@ namespace ReactiveReader.UWP.Controls
         public BlogViewUserControl()
         {
             this.InitializeComponent();
+
+            this.WhenActivated(d =>
+            {
+                // behaviours
+
+            });
         }
 
         object IViewFor.ViewModel

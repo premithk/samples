@@ -10,5 +10,8 @@
     d:DesignWidth="400">
 
     <Grid>
+        <TextBlock x:Name="Title" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="PostedAt" HorizontalAlignment="Left" Margin="328,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="255" Width="380"/>
     </Grid>
 </UserControl>
