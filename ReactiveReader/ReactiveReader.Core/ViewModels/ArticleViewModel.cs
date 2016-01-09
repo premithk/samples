@@ -9,17 +9,15 @@ namespace ReactiveReader.Core.ViewModels
 {
     public interface IArticleViewModel
     {
-        string Author { get; set; }
-        string Body { get; set; }
-        DateTime PostedAt { get; set; }
+        string Content { get; set; }
+        DateTimeOffset PublishDate { get; set; }
         string Title { get; set; }
     }
 
     public class ArticleViewModel : ReactiveObject, IArticleViewModel
     {
-        public string Author { get; set; }
-        public string Body { get; set; }
-        public DateTime PostedAt { get; set; }
+        public string Content { get; set; }
+        public DateTimeOffset PublishDate { get; set; }
         public string Title { get; set; }
     }
 }

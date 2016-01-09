@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,11 +14,13 @@ namespace ReactiveReader.Core.ViewModels.DesignTime
         {
             Blogs = new ReactiveList<BlogViewModel>()
             {
-                new BlogViewModel(new Uri("http://example.com/feed.rss")) {Title = "John Doe"},
-                new BlogViewModel(new Uri("http://example.com/feed.rss")) {Title = "Jane Doe"},
+                new BlogViewModel("John's Blog", new Uri("http://example.com/feed.rss")),
+                new BlogViewModel("Jill's Blog", new Uri("http://example.com/feed.rss"))
             };
         }
 
         public ReactiveList<BlogViewModel> Blogs { get; set; }
+        public ReactiveCommand<Unit> Refresh { get; }
+        public bool IsLoading { get; }
     }
 }

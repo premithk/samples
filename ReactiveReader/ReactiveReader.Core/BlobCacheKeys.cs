@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ReactiveReader.Core
 {
-    public class BlobCacheKeys
+    public static class BlobCacheKeys
     {
-        public string Feeds => "feeds";
+        public const string Feeds = "feeds";
 
-        public string GetCacheKeyForFeedAddress(Uri feedAddress) => $"feedAddress-{feedAddress.Host.ToLowerInvariant()}";
+        public static string GetCacheKeyForFeedAddress(Uri feedAddress) => $"feedAddress-{feedAddress.Host.ToLowerInvariant()}";
     }
 }
