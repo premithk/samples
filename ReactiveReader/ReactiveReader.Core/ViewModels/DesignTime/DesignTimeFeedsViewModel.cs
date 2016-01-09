@@ -19,6 +19,9 @@ namespace ReactiveReader.Core.ViewModels.DesignTime
             };
         }
 
+        public ReactiveCommand<Unit> RemoveBlog { get; }
+        public ReactiveCommand<Unit> AddBlog { get; }
+        public ReactiveCommand<Unit> PersistData { get; }
         public ReactiveList<BlogViewModel> Blogs { get; set; }
         public ReactiveCommand<Unit> RefreshAll { get; }
         public bool IsLoading { get; }
