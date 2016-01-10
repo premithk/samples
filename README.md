@@ -51,11 +51,15 @@ As a rule of thumb when contributing, the samples should cater for our three tar
 ### Xamarin Forms
 
 ### Universal Windows Platform
+* [Design Time / Blend](https://github.com/reactiveui/samples/tree/master/ReactiveReader)
 * Backbutton handling.
 * Pinned Tiles
 * Toasts
 * Deep AppLinks
 * Correct binding avoiding leaks
+
+_User Interface:_
+* [Pivot](https://github.com/reactiveui/samples/tree/master/ReactiveReader)
 
 ### WPF
 * Correct binding avoiding leaks
