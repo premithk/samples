@@ -13,17 +13,17 @@ As a rule of thumb when contributing, the samples should cater for our three tar
 
 ## Architectural Patterns
 * [AOP using Fody](https://github.com/reactiveui/samples/tree/master/Fody)
-* Dependency Injection using Splat
-* Composition Root Dependency Injection
+* Dependency Injection via Splat
+* [Dependency Injection via Composition Root](https://github.com/kentcb/WorkoutWotch/search?utf8=%E2%9C%93&q=composition)
 * Routing View-First
 * Routing ViewModel-First
 * Logging using Splat
 * User Interaction
 * Data persistence in VM (Suspension / Resume)
-* HTTP Rest Integration (Refit)
-* HTTP Request Queues (Fusillade)
-* Saving user data (Akavache/Lager)
-* Caching (Akavache)
+* [HTTP Rest Client](https://github.com/paulcbetts/refit)
+* [HTTP Request Request Limiting, Auto-deduplication, Request Prioritization and Speculative requests](https://github.com/paulcbetts/fusillade)
+* [Cross-platform user settings](https://github.com/flagbug/Lager)
+* [Cross-platform cache and user data persistence](https://github.com/akavache/Akavache)
 
 ## General features
 * Events
