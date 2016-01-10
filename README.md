@@ -12,7 +12,7 @@ As a rule of thumb when contributing, the samples should cater for our three tar
     c) Brand new to everything, doesn't know much yet.
 
 ## Architectural Patterns
-* AOP using Fody
+* [AOP using Fody](https://github.com/reactiveui/samples/tree/master/Fody)
 * Dependency Injection using Splat
 * Composition Root Dependency Injection
 * Routing View-First
