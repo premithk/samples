@@ -18,6 +18,7 @@ namespace ReactiveReader.Core.ViewModels
         ReactiveList<BlogViewModel> Blogs { get; }
         ReactiveCommand<Unit> RefreshAll { get; }
         bool IsLoading { get; }
+        BlogViewModel SelectedBlog { get; }
     }
 
     public class FeedsViewModel : ReactiveObject, IFeedsViewModel
