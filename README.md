@@ -12,7 +12,7 @@ As a rule of thumb when contributing, the samples should cater for our three tar
     c) Brand new to everything, doesn't know much yet.
 
 ## Architectural Patterns
-* [AOP using Fody](https://github.com/reactiveui/samples/tree/master/Fody)
+* [AOP using Fody](https://github.com/reactiveui/samples/tree/master/patterns/Fody)
 * Dependency Injection via Splat
 * [Dependency Injection via Composition Root](https://github.com/kentcb/WorkoutWotch/search?utf8=%E2%9C%93&q=composition)
 * Routing View-First
@@ -51,7 +51,7 @@ As a rule of thumb when contributing, the samples should cater for our three tar
 ### Xamarin Forms
 
 ### Universal Windows Platform
-* [Design Time / Blend](https://github.com/reactiveui/samples/tree/master/ReactiveReader)
+* [Design Time / Blend](https://github.com/reactiveui/samples/tree/master/apps/ReactiveReader)
 * Backbutton handling.
 * Pinned Tiles
 * Toasts
@@ -59,7 +59,7 @@ As a rule of thumb when contributing, the samples should cater for our three tar
 * Correct binding avoiding leaks
 
 _User Interface:_
-* [Pivot](https://github.com/reactiveui/samples/tree/master/ReactiveReader)
+* [Pivot](https://github.com/reactiveui/samples/tree/master/apps/ReactiveReader)
 
 ### WPF
 * Correct binding avoiding leaks
