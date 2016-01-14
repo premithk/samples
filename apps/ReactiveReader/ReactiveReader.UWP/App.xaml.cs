@@ -27,8 +27,8 @@ namespace ReactiveReader.UWP
             this.Suspending += OnSuspending;
 
             Locator.CurrentMutable.RegisterConstant(BlobCache.InMemory, typeof(IBlobCache));
-            Locator.CurrentMutable.Register(() => new ArticleView(), typeof(ArticleViewModel));
-            Locator.CurrentMutable.Register(() => new FeedsView(), typeof(FeedsViewModel));
+            Locator.CurrentMutable.Register(() => new ArticleView(), typeof(IViewFor<ArticleViewModel>));
+            Locator.CurrentMutable.Register(() => new FeedsView(), typeof(IViewFor<FeedsViewModel>));
         }
 
 
