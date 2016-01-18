@@ -6,7 +6,6 @@ namespace ReactiveReader.Core.ViewModels.DesignTime
     {
         public DesignTimeArticleViewModel()
         {
-            Author = "John Doe";
             Content =
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat metus sapien, sit amet vehicula tellus hendrerit a. Nunc euismod lorem vitae turpis vehicula, quis pharetra diam venenatis. Aliquam lacinia libero mauris, et dapibus velit pretium ac. Ut euismod sapien eu tellus euismod ullamcorper. In eget porta est. Nam ligula dui, placerat vel tincidunt non, tristique a enim. Etiam sit amet pulvinar neque. Proin ut orci quis neque porta sagittis.";
             Title =
@@ -14,7 +13,6 @@ namespace ReactiveReader.Core.ViewModels.DesignTime
             PublishDate = DateTime.Now;
         }
 
-        public string Author { get; set; }
         public string Content { get; set; }
         public DateTimeOffset PublishDate { get; set; }
         public string Title { get; set; }
