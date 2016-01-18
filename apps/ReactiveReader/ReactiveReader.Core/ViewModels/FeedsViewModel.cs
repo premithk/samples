@@ -21,7 +21,7 @@ namespace ReactiveReader.Core.ViewModels
         BlogViewModel SelectedBlog { get; }
     }
 
-    public class FeedsViewModel : ReactiveObject, IFeedsViewModel
+    public class FeedsViewModel : ReactiveObject, IFeedsViewModel, IRoutableViewModel
     {
         IBlobCache Cache { get; }
 
@@ -94,5 +94,9 @@ namespace ReactiveReader.Core.ViewModels
         {
             get { return _isLoading.Value; }
         }
+
+        public string UrlPathSegment => "Feeds";
+
+        public IScreen HostScreen { get; private set; }
     }
 }
