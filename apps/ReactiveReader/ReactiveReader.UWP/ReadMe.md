@@ -1,4 +1,4 @@
-﻿Having build issues?
+﻿## Having build issues?
 
 * Restore the NuGet packages for the solution
 * Clean the solution
