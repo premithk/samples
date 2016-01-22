@@ -7,8 +7,8 @@ Our samples are a work in progress, see the above issues to see if someone in th
 
 As a rule of thumb when contributing, the samples should cater for our three target markets:
    
-    a) Know's ReactiveUI, doesn't know the direct platform (iOS|Android|Mac|UWP)
-    b) Know's their direct platform (iOS|Android|Mac|UWP) but doesn't know ReactiveUI.
+    a) Knows ReactiveUI, doesn't know the direct platform (iOS|Android|Mac|UWP)
+    b) Knows their direct platform (iOS|Android|Mac|UWP) but doesn't know ReactiveUI.
     c) Brand new to everything, doesn't know much yet.
 
 ## Architectural Patterns
