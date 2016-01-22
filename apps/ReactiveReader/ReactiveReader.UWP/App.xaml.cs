@@ -11,6 +11,7 @@ namespace ReactiveReader.UWP
     using Core.ViewModels;
     using Splat;
     using Views;
+    using ReactiveUI;
 
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
