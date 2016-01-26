@@ -2,7 +2,6 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace ReactiveReader.UWP
@@ -16,7 +15,7 @@ namespace ReactiveReader.UWP
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    sealed partial class App
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -47,16 +46,16 @@ namespace ReactiveReader.UWP
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            var shell = Window.Current.Content as AppShell;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if (shell == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                shell = new AppShell();
 
-                rootFrame.NavigationFailed += OnNavigationFailed;
+                shell.AppFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -64,15 +63,15 @@ namespace ReactiveReader.UWP
                 }
 
                 // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = shell;
             }
 
-            if (rootFrame.Content == null)
+            if (shell.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(AppShell), e.Arguments);
+                shell.AppFrame.Navigate(typeof(FeedsViewModel), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
