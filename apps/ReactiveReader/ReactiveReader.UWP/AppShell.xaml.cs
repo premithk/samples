@@ -39,7 +39,7 @@ namespace ReactiveReader.UWP
                 {
                     Symbol = Symbol.Setting,
                     Label = "Settings",
-                    //DestPage = typeof (BackupView)
+                    //DestPage = typeof (MainView)
                 },
                 new NavMenuItem
                 {
@@ -197,7 +197,7 @@ namespace ReactiveReader.UWP
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 TogglePaneButton.Visibility = Visibility.Collapsed;
-                RootSplitView.IsPanSelectorEnabled = false;
+                RootSplitView.IsEnabled = false;
             }
             else
             {
@@ -211,7 +211,7 @@ namespace ReactiveReader.UWP
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 TogglePaneButton.Visibility = Visibility.Visible;
-                RootSplitView.IsPanSelectorEnabled = true;
+                RootSplitView.IsEnabled = true;
             }
             else
             {
@@ -367,7 +367,7 @@ namespace ReactiveReader.UWP
             if (SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility ==
                 AppViewBackButtonVisibility.Collapsed || RootSplitView.DisplayMode == SplitViewDisplayMode.Overlay)
             {
-                RootSplitView.IsSwipeablePaneOpen = false;
+                RootSplitView.IsPaneOpen = false;
             }
         }
 
