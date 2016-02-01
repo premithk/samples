@@ -1,34 +1,27 @@
-﻿namespace ReactiveReader.UWP.Views
+﻿using Windows.UI.Xaml;
+using ReactiveReader.Core.ViewModels;
+
+namespace ReactiveReader.UWP.Views
 {
-    using Core.ViewModels;
-using ReactiveUI;
-    using Windows.UI.Xaml;
-
-    public sealed partial class FeedsView : IViewFor<FeedsViewModel>
+    public sealed partial class FeedsView
     {
-        public FeedsView()
-        {
-            this.InitializeComponent();
-        }
-
-        FeedsViewModel BindingRoot => ViewModel;
-
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
             "ViewModel",
-            typeof(FeedsViewModel),
-            typeof(FeedsView),
+            typeof (FeedsViewModel),
+            typeof (FeedsView),
             new PropertyMetadata(default(FeedsViewModel)));
 
-        public FeedsViewModel ViewModel
-            {
-            get { return (FeedsViewModel) GetValue(ViewModelProperty); }
-            set { SetValue(ViewModelProperty, value); }
+        public FeedsView()
+        {
+            InitializeComponent();
         }
 
-        object IViewFor.ViewModel
+        private FeedsViewModel BindingRoot => ViewModel;
+
+        public FeedsViewModel ViewModel
         {
-            get { return ViewModel; }
-            set { ViewModel = (FeedsViewModel) value; }
+            get { return (FeedsViewModel) GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
         }
     }
 }

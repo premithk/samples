@@ -1,34 +1,27 @@
-﻿namespace ReactiveReader.UWP.Views
+﻿using Windows.UI.Xaml;
+using ReactiveReader.Core.ViewModels;
+
+namespace ReactiveReader.UWP.Views
 {
-    using Core.ViewModels;
-using ReactiveUI;
-using Windows.UI.Xaml;
-
-    public sealed partial class ArticleView : IViewFor<ArticleViewModel>
-{
-        public ArticleView()
-        {
-            this.InitializeComponent();
-        }
-
-        ArticleViewModel BindingRoot => ViewModel;
-
+    public sealed partial class ArticleView
+    {
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
             "ViewModel",
-            typeof(ArticleViewModel),
-            typeof(ArticleView),
+            typeof (ArticleViewModel),
+            typeof (ArticleView),
             new PropertyMetadata(default(ArticleViewModel)));
 
-        public ArticleViewModel ViewModel
-            {
-            get { return (ArticleViewModel) GetValue(ViewModelProperty); }
-            set { SetValue(ViewModelProperty, value); }
+        public ArticleView()
+        {
+            InitializeComponent();
         }
 
-        object IViewFor.ViewModel
+        private ArticleViewModel BindingRoot => ViewModel;
+
+        public ArticleViewModel ViewModel
         {
-            get { return ViewModel; }
-            set { ViewModel = (ArticleViewModel)value; }
+            get { return (ArticleViewModel) GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
         }
     }
 }
