@@ -3,31 +3,46 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControls="using:ReactiveReader.UWP.Views.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <RelativePanel>
-        <TextBlock x:Name="Title"
-                   Margin="8,8,0,0"
-                   TextWrapping="Wrap"
-                   Text="{x:Bind BindingRoot.Title, Mode=OneTime}"
-                   RelativePanel.AlignTopWithPanel="True"
-                   RelativePanel.AlignLeftWithPanel="True" />
-        
-        <TextBlock x:Name="PublishDate"
-                   Margin="8,8,0,0"
-                   TextWrapping="Wrap"
-                   Text="{x:Bind BindingRoot.PublishDate, Mode=OneTime}"
-                   RelativePanel.AlignTopWithPanel="True"
-                   RelativePanel.AlignRightWithPanel="True"/>
-        <TextBlock x:Name="Article"
-                   Margin="8,24,0,0"
-                   TextWrapping="Wrap"
-                   Text="{x:Bind BindingRoot.Content, Mode=OneTime}"
-                   Height="256"
-                   RelativePanel.Below="Title"
-                   RelativePanel.AlignLeftWithPanel="True"
-                   RelativePanel.AlignRightWithPanel="True"/>
-    </RelativePanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <userControls:PageHeader>
+            <userControls:PageHeader.HeaderContent>
+                <TextBlock Style="{ThemeResource PageTitleTextBlockStyle}"
+                           Text="Articles" />
+            </userControls:PageHeader.HeaderContent>
+        </userControls:PageHeader>
+
+        <RelativePanel Grid.Row="1">
+            <TextBlock x:Name="Title"
+                       Margin="8,8,0,0"
+                       TextWrapping="Wrap"
+                       Text="{x:Bind BindingRoot.Title, Mode=OneTime}"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignLeftWithPanel="True" />
+
+            <TextBlock x:Name="PublishDate"
+                       Margin="8,8,0,0"
+                       TextWrapping="Wrap"
+                       Text="{x:Bind BindingRoot.PublishDate, Mode=OneTime}"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True" />
+            <TextBlock x:Name="Article"
+                       Margin="8,24,0,0"
+                       TextWrapping="Wrap"
+                       Text="{x:Bind BindingRoot.Content, Mode=OneTime}"
+                       Height="256"
+                       RelativePanel.Below="Title"
+                       RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True" />
+        </RelativePanel>
+    </Grid>
 </UserControl>
