@@ -66,12 +66,12 @@ namespace ReactiveReader.UWP
                 Window.Current.Content = shell;
             }
 
-            if (shell.Content == null)
+            if (shell.AppFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                shell.AppFrame.Navigate(typeof(FeedsViewModel), e.Arguments);
+                shell.AppFrame.Navigate(typeof(FeedsView), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();

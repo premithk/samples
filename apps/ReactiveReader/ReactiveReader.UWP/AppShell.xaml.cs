@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using ReactiveReader.UWP.Controls;
+using ReactiveReader.UWP.Views;
 
 namespace ReactiveReader.UWP
 {
@@ -28,7 +29,7 @@ namespace ReactiveReader.UWP
                 {
                     Symbol = Symbol.Library,
                     Label = "Feeds",
-                    //DestPage = typeof (MainView)
+                    DestPage = typeof (FeedsView)
                 }
             });
 
@@ -39,13 +40,13 @@ namespace ReactiveReader.UWP
                 {
                     Symbol = Symbol.Setting,
                     Label = "Settings",
-                    //DestPage = typeof (MainView)
+                    DestPage = typeof (SettingsView)
                 },
                 new NavMenuItem
                 {
                     Symbol = Symbol.Account,
                     Label = "About",
-                    //DestPage = typeof (AboutView)
+                    DestPage = typeof (AboutView)
                 }
             });
 
