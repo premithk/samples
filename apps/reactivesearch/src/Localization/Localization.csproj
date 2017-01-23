@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DA45165E-C964-4A76-BE1F-5FD922433DD0}</ProjectGuid>
@@ -13,8 +13,9 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,11 +44,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonResources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="CommonResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CommonResources.resx</DependentUpon>
     </Compile>
     <Compile Include="CommonResources.es.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -84,11 +80,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DroidResources.de.resx</DependentUpon>
     </Compile>
-    <Compile Include="Platforms\DroidResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DroidResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Platforms\DroidResources.es.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,11 +114,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>iOSResources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Platforms\iOSResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>iOSResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Platforms\iOSResources.es.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -164,11 +150,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UWPResources.de.resx</DependentUpon>
     </Compile>
-    <Compile Include="Platforms\UWPResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UWPResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Platforms\UWPResources.es.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -204,11 +185,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchViewModelResources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\SearchViewModel\SearchViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SearchViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SearchViewModel\SearchViewModelResources.es.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -269,7 +245,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommonResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>CommonResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonResources.ru.resx">
@@ -309,7 +284,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Platforms\DroidResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DroidResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Platforms\DroidResources.ru.resx">
@@ -349,7 +323,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Platforms\iOSResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>iOSResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Platforms\iOSResources.ru.resx">
@@ -389,7 +362,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Platforms\UWPResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UWPResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Platforms\UWPResources.ru.resx">
@@ -429,7 +401,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\SearchViewModel\SearchViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\SearchViewModel\SearchViewModelResources.ru.resx">
@@ -453,6 +424,7 @@
     <XliffResource Include="MultilingualResources\Localization.zh-Hans.xlf" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="project.json" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
