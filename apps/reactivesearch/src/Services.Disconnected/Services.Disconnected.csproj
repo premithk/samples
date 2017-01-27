@@ -35,6 +35,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="Api\DuckDuckGoApiDisconnected.cs" />
+    <Compile Include="Api\DuckDuckGoApiDisconnectedResponses.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DuckDuckGoApiDisconnectedResponses.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Api\DuckDuckGoApiServiceDisconnected.cs" />
+    <Compile Include="DisconnectedErrorException.cs" />
+    <Compile Include="ObservableExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.2\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
@@ -53,5 +62,11 @@
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Api\DuckDuckGoApiDisconnectedResponses.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DuckDuckGoApiDisconnectedResponses.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
