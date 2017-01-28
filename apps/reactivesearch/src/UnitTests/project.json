@@ -4,6 +4,9 @@
     "fluentassertions": "4.18.0",
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
     "NETStandard.Library": "1.6.0",
+    "pclmock": "4.0.0",
+    "PCLMock.CodeGeneration.Console": "4.0.0",
+    "PCLMock.CodeGeneration.T4": "4.0.0",
     "xunit": "2.1.0"
   },
   "frameworks": {

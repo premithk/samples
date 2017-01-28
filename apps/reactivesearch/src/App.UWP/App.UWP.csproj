@@ -160,10 +160,6 @@
       <Project>{626e6afc-b884-4555-bfd9-1a76b3852a55}</Project>
       <Name>Services.Disconnected</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services.UWP\Services.UWP.csproj">
-      <Project>{02545fac-601f-4631-98b2-b96d7a65e1fc}</Project>
-      <Name>Services.UWP</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{41a3af92-317a-4ea3-b048-5f6fd8d66944}</Project>
       <Name>Services</Name>

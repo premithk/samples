@@ -4,6 +4,7 @@ using ReactiveSearch.Services.Search;
 using ReactiveSearch.Services.State;
 using ReactiveSearch.Utility;
 using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 
 namespace ReactiveSearch.Services.Connected.Search
@@ -22,10 +23,11 @@ namespace ReactiveSearch.Services.Connected.Search
             _stateService = stateService;
         }
 
-        public IObservable<DuckDuckGoSearchResult> Search(string query)
+        public IObservable<IEnumerable<DuckDuckGoSearchResult>> Search(string query)
         {
-            return _stateService.GetOrFetch(BlobCacheKeys.GetKeyForSearch(query),
-                async () => await _duckDuckGoApiService.UserInitiated.Search(query), absoluteExpiration: DateTime.UtcNow.AddDays(7));
+            return Observable.Return(new List<DuckDuckGoSearchResult>());
+            //return _stateService.GetOrFetch(BlobCacheKeys.GetKeyForSearch(query),
+            //    async () => await _duckDuckGoApiService.UserInitiated.Search(query), absoluteExpiration: DateTime.UtcNow.AddDays(7));
         }
     }
 }

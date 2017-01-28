@@ -4,7 +4,8 @@
     "akavache": "5.0.0",
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
     "NETStandard.Library": "1.6.0",
-    "reactiveui": "7.1.0"
+    "reactiveui": "7.1.0",
+    "Xam.Plugin.Connectivity": "2.3.0"
   },
   "frameworks": {
     "netstandard1.4": {

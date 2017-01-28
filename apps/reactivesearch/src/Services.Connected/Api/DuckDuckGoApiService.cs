@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Fusillade;
 using HttpClientDiagnostics;
-using ModernHttpClient;
 using ReactiveSearch.Services.Api;
 using Refit;
 
@@ -30,18 +31,26 @@ namespace ReactiveSearch.Services.Connected.Api
             };
 
             _background = new Lazy<IDuckDuckGoApi>(() => createClient(
-                new RateLimitedHttpMessageHandler(new NativeMessageHandler(), Priority.Background)));
+                new RateLimitedHttpMessageHandler(new DummyHandler(), Priority.Background)));
 
             _userInitiated = new Lazy<IDuckDuckGoApi>(() => createClient(
-                new RateLimitedHttpMessageHandler(new NativeMessageHandler(), Priority.UserInitiated)));
+                new RateLimitedHttpMessageHandler(new DummyHandler(), Priority.UserInitiated)));
 
             _speculative = new Lazy<IDuckDuckGoApi>(() => createClient(
-                new RateLimitedHttpMessageHandler(new NativeMessageHandler(), Priority.Speculative)));
+                new RateLimitedHttpMessageHandler(new DummyHandler(), Priority.Speculative)));
         }
 
         public IDuckDuckGoApi Background => _background.Value;
 
         public IDuckDuckGoApi Speculative => _speculative.Value;
         public IDuckDuckGoApi UserInitiated => _userInitiated.Value;
+    }
+
+    public class DummyHandler : DelegatingHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            return base.SendAsync(request, cancellationToken);
+        }
     }
 }

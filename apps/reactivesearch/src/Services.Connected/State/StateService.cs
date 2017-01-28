@@ -7,13 +7,13 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Akavache;
-using Anotar.Splat;
 using ReactiveSearch.Services.State;
 using ReactiveSearch.Utility;
+using Splat;
 
 namespace ReactiveSearch.Services.Connected.State
 {
-    public sealed class StateService : IStateService
+    public sealed class StateService : IStateService, IEnableLogger
     {
         private readonly IBlobCache _blobCache;
         private readonly object _sync;
@@ -105,7 +105,7 @@ namespace ReactiveSearch.Services.Connected.State
                 .Catch(
                     (Exception ex) =>
                     {
-                        LogTo.ErrorException(() => "Failed to save", ex);
+                        this.Log().ErrorException("Failed to save", ex);
                         return Observable.Return(Unit.Default);
                     });
         }

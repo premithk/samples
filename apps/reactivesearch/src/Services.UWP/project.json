@@ -1,5 +1,7 @@
 ﻿{
-  "dependencies": {},
+  "dependencies": {
+    "Xam.Plugin.Connectivity": "2.3.0"
+  },
   "frameworks": {
     "uap10.0": {}
   },
