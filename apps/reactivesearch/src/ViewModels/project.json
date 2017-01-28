@@ -3,7 +3,8 @@
   "dependencies": {
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
     "NETStandard.Library": "1.6.0",
-    "reactiveui": "7.1.0"
+    "reactiveui": "7.1.0",
+    "reactiveui.fody": "2.0.65"
   },
   "frameworks": {
     "netstandard1.4": {

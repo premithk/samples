@@ -1,5 +1,8 @@
 ﻿{
-  "dependencies": {},
+  "dependencies": {
+    "reactiveui": "7.1.0",
+    "reactiveui-events": "7.1.0"
+  },
   "frameworks": {
     "uap10.0": {}
   },
